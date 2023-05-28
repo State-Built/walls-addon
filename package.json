@@ -1,0 +1,10 @@
+{
+  "name": "gated",
+  "scripts": {
+    "dev": "mix -- --watch",
+    "prod": "mix --prod"
+  },
+  "devDependencies": {
+    "laravel-mix": "^6.0.49"
+  }
+}

@@ -1,0 +1,15 @@
+{{ if ! logged_in }}
+  {{ redirect to="register" }}
+{{ /if }}
+
+<form id="payment-form">
+    <input type="hidden" name="stripe_return_url" value="{{ route:gated.payment.success }}">
+    <div id="payment-element">
+        <!--Stripe.js injects the Payment Element-->
+    </div>
+    <button class="btn" id="submit">
+        <div class="spinner hidden" id="spinner"></div>
+        <span id="button-text">Pay now</span>
+    </button>
+    <div id="payment-message" class="hidden"></div>
+</form>

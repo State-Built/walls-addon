@@ -1,0 +1,43 @@
+{
+    "name": "state/gated",
+    "autoload": {
+        "psr-4": {
+            "State\\Gated\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GatedTests\\": "tests/"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Gated",
+            "description": "Gated addon"
+        },
+        "laravel": {
+            "providers": [
+                "State\\Gated\\ServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "statamic/cms": ">=3.0",
+        "stripe/stripe-php": "^7.100"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^v8.5",
+        "pestphp/pest": "^v2.6.0",
+        "pestphp/pest-plugin-mock": "^v2.0.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/pest",
+        "tw": "vendor/bin/pest --watch"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "pixelfear/composer-dist-plugin": true
+        }
+    }
+}
