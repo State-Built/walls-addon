@@ -26,7 +26,6 @@ class AddToCart
         }
 
         if($request->has('redirect')) {
-
             return redirect($request->input('redirect'));
         }
 
