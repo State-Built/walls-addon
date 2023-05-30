@@ -1,79 +1,98 @@
-sections:
+title: Gate
+tabs:
   main:
     display: Main
-    fields:
+    sections:
       -
-        handle: title
-        field:
-          type: text
-          required: true
-          validate:
-            - required
-      -
-        handle: type
-        field:
-          options:
-            payment: Payment
-            'null': 'Null'
-          multiple: false
-          clearable: false
-          searchable: true
-          taggable: false
-          push_tags: false
-          cast_booleans: false
-          default: payment
-          display: Type
-          type: select
-          icon: select
-          instructions: 'The gate type. Payment Gate or Null'
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-      -
-        handle: price
-        field:
-          placeholder: '25.00'
-          input_type: number
-          antlers: false
-          display: Price
-          type: text
-          icon: text
-          instructions: 'The price to get behind the paywall.'
-          width: 50
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-          validate:
-            - 'min:1'
-            - numeric
-          if:
-            type: 'equals payment'
-      -
-        handle: expires_after
-        field:
-          input_type: number
-          antlers: false
-          display: 'Expires after'
-          type: text
-          icon: text
-          instructions: 'The number of days a user has access to content. Leave empty for no expiration.'
-          width: 50
-          listable: hidden
-          instructions_position: above
-          visibility: visible
-          always_save: false
-          if:
-            type: 'equals payment'
-          validate:
-            - numeric
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: type
+            field:
+              options:
+                payment: Payment
+                'null': 'Null'
+              multiple: false
+              clearable: false
+              searchable: true
+              taggable: false
+              push_tags: false
+              cast_booleans: false
+              default: payment
+              display: Type
+              type: select
+              icon: select
+              instructions: 'The gate type. Payment Gate or Null'
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+          -
+            handle: price
+            field:
+              placeholder: '25.00'
+              input_type: number
+              antlers: false
+              display: Price
+              type: text
+              icon: text
+              instructions: 'The price to get behind the paywall.'
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              validate:
+                - 'min:1'
+                - numeric
+              hide_display: false
+              if:
+                type: 'equals payment'
+          -
+            handle: expires_after
+            field:
+              input_type: number
+              antlers: false
+              display: 'Expires after'
+              type: text
+              icon: text
+              instructions: 'The number of days a user has access to content. Leave empty for no expiration.'
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              if:
+                type: 'equals payment'
+              validate:
+                - numeric
   sidebar:
     display: Sidebar
-    fields:
+    sections:
       -
-        handle: slug
-        field:
-          type: slug
-          localizable: true
-title: Gate
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+          -
+            handle: gate_home
+            field:
+              max_items: 1
+              mode: default
+              create: true
+              display: 'Gate Home'
+              type: entries
+              icon: entries
+              instructions: 'The home entry for this ie: the entry where your e-course lives.'
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false

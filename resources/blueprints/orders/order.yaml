@@ -1,0 +1,84 @@
+title: Order
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: gates
+            field:
+              mode: default
+              create: true
+              collections:
+                - gates
+              display: Gates
+              type: entries
+              icon: entries
+              listable: hidden
+              instructions_position: above
+              visibility: visible
+              always_save: false
+              width: 50
+          -
+            handle: user
+            field:
+              max_items: 1
+              mode: select
+              display: User
+              type: users
+              icon: users
+              width: 50
+              listable: hidden
+              instructions_position: above
+              visibility: read_only
+              always_save: false
+          -
+            handle: purchase_date
+            field:
+              mode: single
+              time_enabled: true
+              time_seconds_enabled: true
+              full_width: false
+              inline: false
+              columns: 1
+              rows: 1
+              display: 'Purchase Date'
+              type: date
+              icon: date
+              width: 66
+              listable: hidden
+              instructions_position: above
+              visibility: read_only
+              always_save: false
+              hide_display: false
+          -
+            handle: stripe_id
+            field:
+              input_type: text
+              antlers: false
+              display: 'Stripe ID'
+              type: text
+              icon: text
+              width: 33
+              listable: hidden
+              instructions_position: above
+              visibility: read_only
+              always_save: false
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
