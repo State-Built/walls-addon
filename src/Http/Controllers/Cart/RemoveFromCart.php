@@ -17,6 +17,10 @@ class RemoveFromCart
             return response([], 201);
         }
 
+        if($request->has('redirect')) {
+            return redirect($request->input('redirect'));
+        }
+
         return back();
     }
 }
