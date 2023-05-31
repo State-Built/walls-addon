@@ -1,9 +1,9 @@
 <?php
 
 
-Route::prefix('gated')
-     ->name('gated.')
-     ->namespace('\State\Gated\Http\Controllers')
+Route::prefix('walls')
+     ->name('walls.')
+     ->namespace('\State\Walls\Http\Controllers')
      ->group(function () {
          Route::post('payment-intent', 'Payment\CreatePaymentIntent')
               ->name('payment.create-intent')

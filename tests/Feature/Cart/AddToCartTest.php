@@ -2,13 +2,13 @@
 // AddToCart
 
 use Statamic\Contracts\Entries\QueryBuilder;
-use State\Gated\Cart;
-use State\Gated\Gate;
-use State\Gated\PaymentGate;
+use State\Walls\Cart;
+use State\Walls\Wall;
+use State\Walls\PaymentWall;
 
 it('adds to cart', function () {
 
-    // Fake the QueryBuilder and return a stub gate config.
+    // Fake the QueryBuilder and return a stub wall config.
     app()->bind(QueryBuilder::class, fn() => new class {
         public function where()
         {
@@ -21,15 +21,15 @@ it('adds to cart', function () {
         }
     });
 
-    $this->postJson('gated/cart/add', [
-        'gate' => 'my_gate',
+    $this->postJson('walls/cart/add', [
+        'wall' => 'my_gate',
     ])->assertStatus(201);
 
-    expect(Cart::get()[0])->toBeInstanceOf(PaymentGate::class);
+    expect(Cart::get()[0])->toBeInstanceOf(PaymentWall::class);
 });
 
 it('404s', function () {
-    $this->postJson('gated/cart/add', [
-        'gate' => 'foo',
+    $this->postJson('walls/cart/add', [
+        'wall' => 'foo',
     ])->assertStatus(404);
 });

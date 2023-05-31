@@ -1,26 +1,18 @@
 <?php
 
-namespace State\Gated\Http\Controllers\Cart;
+namespace State\Walls\Http\Controllers\Cart;
 
 use Illuminate\Http\Request;
-use State\Gated\Cart;
+use State\Walls\Cart;
 
 class RemoveFromCart
 {
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, CartResponder $responder)
     {
-        $request->validate(['gate' => 'required']);
+        $request->validate(['wall' => 'required']);
 
-        Cart::remove($request->input('gate'));
+        Cart::remove($request->input('wall'));
 
-        if($request->expectsJson()) {
-            return response([], 201);
-        }
-
-        if($request->has('redirect')) {
-            return redirect($request->input('redirect'));
-        }
-
-        return back();
+        return $responder->respond();
     }
 }

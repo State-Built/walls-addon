@@ -1,14 +1,14 @@
 <?php
 
 
-namespace State\Gated;
+namespace State\Walls;
 
 
 use Illuminate\Support\Facades\Auth;
 use Statamic\Auth\Protect\Protectors\Protector;
 use Statamic\Facades\Entry;
 
-class GateProtector extends Protector
+class WallsProtector extends Protector
 {
     public function protect()
     {
@@ -28,7 +28,7 @@ class GateProtector extends Protector
     {
         return (bool)array_first($allowedGates, function ($item) {
             $entry = Entry::query()
-                ->where('collection', 'gates') // make configurable?
+                ->where('collection', 'walls') // make configurable?
                 ->where('slug', $item)
                 ->first();
 
@@ -36,7 +36,7 @@ class GateProtector extends Protector
                 return false;
             }
 
-            return Gate::create($item, $entry->toArray())
+            return Wall::create($item, $entry->toArray())
                 ->userCanPass(Auth::user());
         });
     }

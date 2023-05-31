@@ -1,10 +1,10 @@
 <?php
 
-namespace State\Gated;
+namespace State\Walls;
 
 use Statamic\Contracts\Auth\User;
 
-class NullGate extends Gate
+class NullWall extends Wall
 {
 
     public function userCanPass(User $user): bool

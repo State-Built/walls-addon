@@ -1,35 +1,27 @@
 <?php
 
-namespace State\Gated\Http\Controllers\Cart;
+namespace State\Walls\Http\Controllers\Cart;
 
 use Illuminate\Http\Request;
-use State\Gated\Cart;
-use State\Gated\Gate;
+use State\Walls\Cart;
+use State\Walls\Wall;
 
 class AddToCart
 {
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, CartResponder $responder)
     {
          $request->validate([
-            'gate' => ['required']
+            'wall' => ['required']
         ]);
 
-        $handle = $request->input('gate');
+        $handle = $request->input('wall');
 
-        $gate = Gate::findBySlug($handle);
+        $gate = Wall::findBySlug($handle);
 
         Cart::add($gate);
 
-        if($request->expectsJson()) {
-            return response([], 201);
-        }
-
-        if($request->has('redirect')) {
-            return redirect($request->input('redirect'));
-        }
-
-        return back();
+        return $responder->respond();
     }
 
 }

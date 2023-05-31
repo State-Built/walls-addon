@@ -1,13 +1,13 @@
 <?php
 
 
-namespace State\Gated;
+namespace State\Walls;
 
 
 
 use Statamic\Contracts\Auth\User;
 
-class PaymentGate extends Gate
+class PaymentWall extends Wall
 {
 
     public function getPrice() : int

@@ -17,7 +17,7 @@ if(paymentForm) {
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-    const {clientSecret} = await requestJson('gated/payment-intent');
+    const {clientSecret} = await requestJson('walls/payment-intent');
 
     elements = stripe.elements({clientSecret});
 

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace State\Gated\Http\Controllers\CP;
+namespace State\Walls\Http\Controllers\CP;
 
 use Illuminate\Http\Request;
 use Statamic\Http\Controllers\CP\CpController;
-use State\Gated\Gate;
-use State\Gated\GateBlueprint;
+use State\Walls\Wall;
+use State\Walls\GateBlueprint;
 
 class GatesController extends CpController
 {
@@ -15,9 +15,9 @@ class GatesController extends CpController
     {
         // todo: authorize User can view.
 
-        // todo: get all Gates.
+        // todo: get all Walls.
 
-        return view('gated::cp.index', []);
+        return view('walls::cp.index', []);
     }
 
     public function create()
@@ -25,7 +25,7 @@ class GatesController extends CpController
         $blueprint = GateBlueprint::make();
         $fields    = $blueprint->fields()->preProcess();
 
-        return view('gated::cp.create', [
+        return view('walls::cp.create', [
             'blueprint' => $blueprint->toPublishArray(),
             'meta'      => $fields->meta(),
             'values'    => $fields->values(),
@@ -39,7 +39,7 @@ class GatesController extends CpController
         $fields->validate();
         $values = $fields->process()->values();
 
-        Gate::create($values->toArray());
+        Wall::create($values->toArray());
 
 
 

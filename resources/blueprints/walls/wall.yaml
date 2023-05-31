@@ -1,4 +1,4 @@
-title: Gate
+title: Wall
 tabs:
   main:
     display: Main
@@ -28,7 +28,7 @@ tabs:
               display: Type
               type: select
               icon: select
-              instructions: 'The gate type. Payment Gate or Null'
+              instructions: 'The wall type. Payment Wall or Null'
               listable: hidden
               instructions_position: above
               visibility: visible
@@ -83,12 +83,12 @@ tabs:
               type: slug
               localizable: true
           -
-            handle: gate_home
+            handle: wall_home
             field:
               max_items: 1
               mode: default
               create: true
-              display: 'Gate Home'
+              display: 'Wall Home'
               type: entries
               icon: entries
               instructions: 'The home entry for this ie: the entry where your e-course lives.'

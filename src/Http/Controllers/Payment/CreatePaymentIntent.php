@@ -1,12 +1,12 @@
 <?php
 
 
-namespace State\Gated\Http\Controllers\Payment;
+namespace State\Walls\Http\Controllers\Payment;
 
 
 use Illuminate\Http\Request;
-use State\Gated\Payment\PaymentIntentFactory;
-use State\Gated\PaymentGate;
+use State\Walls\Payment\PaymentIntentFactory;
+use State\Walls\PaymentWall;
 
 class CreatePaymentIntent
 {

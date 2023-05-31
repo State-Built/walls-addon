@@ -1,13 +1,13 @@
 <?php
 
-namespace GatedTests;
+namespace WallsTests;
 
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;
 use Statamic\Extend\Manifest;
 use Statamic\Providers\StatamicServiceProvider;
 use Statamic\Statamic;
-use State\Gated\ServiceProvider;
+use State\Walls\ServiceProvider;
 
 
 class TestCase extends OrchestraTestCase
@@ -33,9 +33,9 @@ class TestCase extends OrchestraTestCase
         parent::getEnvironmentSetUp($app);
 
         $app->make(Manifest::class)->manifest = [
-            'state/gated' => [
-                'id'        => 'state/gated',
-                'namespace' => 'State\\Gated',
+            'state/walls' => [
+                'id'        => 'state/walls',
+                'namespace' => 'State\\Walls',
             ],
         ];
 

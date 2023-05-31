@@ -1,6 +1,6 @@
 <?php
 
-namespace State\Gated\Payment;
+namespace State\Walls\Payment;
 
 use Stripe\PaymentIntent;
 

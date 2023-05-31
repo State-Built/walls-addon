@@ -2,22 +2,22 @@
 // NullGateTest
 
 use Statamic\Facades\User;
-use State\Gated\NullGate;
+use State\Walls\NullWall;
 
 beforeEach(function() {
-    $this->gate = (new NullGate)->setHandle('null');
+    $this->wall = (new NullWall)->setHandle('null');
 });
 
-it('userCanPass is false when user does not have gate', function () {
+it('userCanPass is false when user does not have wall', function () {
     $user = User::make();
 
-    expect($this->gate->userCanPass($user))->toBeFalse();
+    expect($this->wall->userCanPass($user))->toBeFalse();
 });
 
 
-it('userCanPass is true when user does have gate', function () {
+it('userCanPass is true when user does have wall', function () {
     $user = User::make();
-    $user->set('gates', [['handle' => 'null']]);
+    $user->set('walls', [['handle' => 'null']]);
 
-    expect($this->gate->userCanPass($user))->toBeTrue();
+    expect($this->wall->userCanPass($user))->toBeTrue();
 });

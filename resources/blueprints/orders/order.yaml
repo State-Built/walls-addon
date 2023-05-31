@@ -13,13 +13,13 @@ tabs:
               validate:
                 - required
           -
-            handle: gates
+            handle: walls
             field:
               mode: default
               create: true
               collections:
-                - gates
-              display: Gates
+                - walls
+              display: Walls
               type: entries
               icon: entries
               listable: hidden

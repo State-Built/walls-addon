@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Auth;
 use Statamic\Facades\User;
 
-uses(GatedTests\TestCase::class)->in('Unit', 'Feature');
+uses(WallsTests\TestCase::class)->in('Unit', 'Feature');
 
 uses()->beforeEach(function () {
-    config()->set('gated.gates.test', [
+    config()->set('walls.walls.test', [
         'driver' => 'payment',
         'price' => 1000
     ]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace State\Gated;
+namespace State\Walls;
 
 use Illuminate\Support\Facades\Route;
 use Statamic\Auth\Protect\ProtectorManager;
@@ -8,8 +8,8 @@ use Statamic\Facades\Addon;
 use Statamic\Facades\CP\Nav;
 use Statamic\Providers\AddonServiceProvider;
 use Statamic\Support\Str;
-use State\Gated\Http\Middleware\GateMiddleware;
-use State\Gated\Tags\Gated;
+use State\Walls\Http\Middleware\GateMiddleware;
+use State\Walls\Tags\Walls;
 use Stripe\Stripe;
 
 class ServiceProvider extends AddonServiceProvider
@@ -21,7 +21,7 @@ class ServiceProvider extends AddonServiceProvider
     ];
 
     protected $tags = [
-        Gated::class,
+        Walls::class,
     ];
 
     public function boot()
@@ -40,47 +40,47 @@ class ServiceProvider extends AddonServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/gated.php', 'gated');
+        $this->mergeConfigFrom(__DIR__.'/../config/walls.php', 'walls');
     }
 
     private function createNavigation()
     {
         Nav::extend(function ($nav) {
-            $nav->content('Gated')
-                ->route('collections.show', 'gates')
+            $nav->content('Walls')
+                ->route('collections.show', 'walls')
                 ->icon('entries');
         });
     }
 
     private function setUpStripe()
     {
-        Stripe::setApiKey(config('gated.payments.stripe.secret_key'));
+        Stripe::setApiKey(config('walls.payments.stripe.secret_key'));
     }
 
     private function publishResources()
     {
         $this->publishes([
-            __DIR__.'/../config/gated.php' => config_path('gated.php'),
-            __DIR__.'/../resources/js' => public_path('/vendor/state/gated/js'),
-            __DIR__.'/../resources/css' => public_path('/vendor/state/gated/css'),
+            __DIR__.'/../config/walls.php' => config_path('walls.php'),
+            __DIR__.'/../resources/js' => public_path('/vendor/state/walls/js'),
+            __DIR__.'/../resources/css' => public_path('/vendor/state/walls/css'),
             __DIR__.'/../resources/blueprints' => resource_path('blueprints/collections'),
             __DIR__.'/../resources/content' => base_path('content/collections'),
-        ], 'gated');
+        ], 'walls');
     }
 
     protected function createRouteBinding(): void
     {
-        Route::bind('gate', function ($handle) {
-            $config = config('gated.gates.'.$handle);
+        Route::bind('wall', function ($handle) {
+            $config = config('walls.walls.'.$handle);
 
-            return Gate::create($handle, $config);
+            return Wall::create($handle, $config);
         });
     }
 
     protected function registerProtector(): void
     {
-        app(ProtectorManager::class)->extend('gated', function ($app) {
-            return new GateProtector;
+        app(ProtectorManager::class)->extend('walls', function ($app) {
+            return new WallsProtector;
         });
     }
 

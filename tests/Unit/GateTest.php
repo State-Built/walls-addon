@@ -3,10 +3,10 @@
 
 
 use Statamic\Auth\User;
-use State\Gated\Gate;
+use State\Walls\Wall;
 
 it('can be created', function () {
-    $gate = Gate::create('test', ['type' => ['value' => 'null']]);
+    $gate = Wall::create('test', ['type' => ['value' => 'null']]);
 
     expect($gate)->not()->toBeNull();
 });
@@ -16,11 +16,11 @@ it('can belong to a user', function () {
 
     $user->shouldReceive('get')
          ->twice()
-         ->withArgs(['gates', []])
+         ->withArgs(['walls', []])
          ->andReturn([['handle' => 'basic']]);
 
-    $basicGate   = Gate::create('basic', ['type' => ['value' => 'null']]);
-    $premiumGate = Gate::create('premium', ['type' => ['value' => 'null']]);
+    $basicGate   = Wall::create('basic', ['type' => ['value' => 'null']]);
+    $premiumGate = Wall::create('premium', ['type' => ['value' => 'null']]);
 
     expect($basicGate->userHasGate($user))->toBeTrue()
         ->and($premiumGate->userHasGate($user))->toBeFalse();

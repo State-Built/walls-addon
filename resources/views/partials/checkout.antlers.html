@@ -3,7 +3,7 @@
 {{ /if }}
 
 <form id="payment-form">
-    <input type="hidden" name="stripe_return_url" value="{{ route:gated.payment.success }}">
+    <input type="hidden" name="stripe_return_url" value="{{ route:walls.payment.success }}">
     <div id="payment-element">
         <!--Stripe.js injects the Payment Element-->
     </div>

@@ -1,5 +1,5 @@
 {
-  "name": "gated",
+  "name": "walls",
   "scripts": {
     "dev": "mix -- --watch",
     "prod": "mix --prod"

@@ -1,23 +1,23 @@
 {
-    "name": "state/gated",
+    "name": "state/walls",
     "autoload": {
         "psr-4": {
-            "State\\Gated\\": "src"
+            "State\\Walls\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "GatedTests\\": "tests/"
+            "WallsTests\\": "tests/"
         }
     },
     "extra": {
         "statamic": {
-            "name": "Gated",
-            "description": "Gated addon"
+            "name": "Walls",
+            "description": "Walls addon"
         },
         "laravel": {
             "providers": [
-                "State\\Gated\\ServiceProvider"
+                "State\\Walls\\ServiceProvider"
             ]
         }
     },

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace State\Gated\Payment;
+namespace State\Walls\Payment;
 
 
 use Statamic\Auth\User;
-use State\Gated\Cart;
-use State\Gated\PaymentGate;
+use State\Walls\Cart;
+use State\Walls\PaymentWall;
 use Stripe\Customer;
 use Stripe\PaymentIntent;
 
@@ -27,13 +27,13 @@ class PaymentIntentFactory
 
         return PaymentIntent::create([ // todo: support multi-currency.
             'amount' => Cart::total(),
-            'currency' => config('gated.stripe.currency', 'usd'),
+            'currency' => config('walls.stripe.currency', 'usd'),
             'customer' => $customerId,
             'setup_future_usage' => 'off_session',
             'metadata' => [
                 'items' => Cart::get()->map->getHandle(),
             ],
-            'payment_method_types' => config('gated.stripe.payment_method_types', ['card']),
+            'payment_method_types' => config('walls.stripe.payment_method_types', ['card']),
         ]);
     }
 

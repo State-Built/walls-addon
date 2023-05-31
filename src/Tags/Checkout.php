@@ -1,7 +1,7 @@
 <?php
 
 
-namespace State\Gated\Tags;
+namespace State\Walls\Tags;
 
 
 use Statamic\Tags\Tags;

@@ -1,6 +1,6 @@
 ---
 id: cb9d05a6-3364-4895-87a8-08de5c165f72
-blueprint: gate
+blueprint: wall
 title: Ecourse
 type: payment
 price: 59.99

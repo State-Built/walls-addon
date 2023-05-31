@@ -1,13 +1,13 @@
 <?php
 
 
-namespace State\Gated;
+namespace State\Walls;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Statamic\Facades\Entry;
 use Statamic\Contracts\Auth\User;
 
-abstract class Gate implements Arrayable
+abstract class Wall implements Arrayable
 {
     protected $handle;
     protected $config;
@@ -27,14 +27,14 @@ abstract class Gate implements Arrayable
         return $this->config;
     }
 
-    public function setHandle(string $handle): Gate
+    public function setHandle(string $handle): Wall
     {
         $this->handle = $handle;
 
         return $this;
     }
 
-    public function setConfig(array $config): Gate
+    public function setConfig(array $config): Wall
     {
         $this->config = $config;
 
@@ -43,8 +43,8 @@ abstract class Gate implements Arrayable
 
     public function addToUser(User $user)
     {
-        $gates = $user->get('gates', []);
-        $user->set('gates', array_merge([$this->userGateArray()], $gates));
+        $gates = $user->get('walls', []);
+        $user->set('walls', array_merge([$this->userGateArray()], $gates));
         $user->save();
     }
 
@@ -52,18 +52,20 @@ abstract class Gate implements Arrayable
     {
         $handles = array_map(function ($gate) {
             return $gate['handle'];
-        }, $user->get('gates', []));
+        }, $user->get('walls', []));
 
         return in_array($this->handle, $handles);
     }
 
     abstract public function userCanPass(User $user): bool;
 
-    public static function create(string $handle, array $config): Gate
+    public static function create(string $handle, array $config): Wall
     {
-        $gate = match ($config['type']['value']) {
-            'payment' => new PaymentGate,
-            default => new NullGate,
+        $type = $config['type']['value'] ?? $config['type'];
+
+        $gate = match ($type) {
+            'payment' => new PaymentWall,
+            default => new NullWall,
         };
 
         return $gate->setHandle($handle)->setConfig($config);
@@ -71,9 +73,8 @@ abstract class Gate implements Arrayable
 
     public static function findBySlug(string $slug)
     {
-
         $entry = Entry::query()
-            ->where('collection', 'gates')
+            ->where('collection', 'walls')
             ->where('slug', $slug)
             ->first();
 
@@ -92,7 +93,7 @@ abstract class Gate implements Arrayable
 
     public function getGateDataFromUser(User $user): array|false
     {
-        $gates = $user->get('gates', []);
+        $gates = $user->get('walls', []);
 
         return array_first($gates, function ($gate) {
             return $gate['handle'] === $this->handle;
@@ -101,8 +102,8 @@ abstract class Gate implements Arrayable
 
     public function toArray(): array
     {
-        if (isset($this->config['gate_home'][0])) {
-            $this->config['gate_home'] = Entry::find($this->config['gate_home'][0])->toArray();
+        if (isset($this->config['wall_home'])) {
+            $this->config['wall_home'] = Entry::find($this->config['wall_home'][0])->toArray();
         }
 
         return $this->config;

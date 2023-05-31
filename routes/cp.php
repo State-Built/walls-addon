@@ -1,15 +1,15 @@
 <?php
 
 
-Route::namespace('\State\Gated\Http\Controllers\CP')
-     ->prefix('/gated')
-     ->name('gated.')
+Route::namespace('\State\Walls\Http\Controllers\CP')
+     ->prefix('/walls')
+     ->name('walls.')
      ->group(function() {
 
-         Route::get('/gates', 'GatesController@index')->name('index');
+         Route::get('/walls', 'GatesController@index')->name('index');
 
-         Route::get('/gates/new', 'GatesController@create')->name('create');
+         Route::get('/walls/new', 'GatesController@create')->name('create');
 
-         Route::post('/gates', 'GatesController@store')->name('store');
+         Route::post('/walls', 'GatesController@store')->name('store');
 
      });

@@ -1,6 +1,6 @@
 <?php
 
-namespace State\Gated;
+namespace State\Walls;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 class Cart
 {
 
-    public static function add(Gate $product)
+    public static function add(Wall $product)
     {
         $cart = Session::get('cart', []);
 
@@ -22,7 +22,7 @@ class Cart
         $gates = [];
 
         foreach ($cart as $handle => $config) {
-            $gates[] = Gate::create($handle, $config);
+            $gates[] = Wall::create($handle, $config);
         }
 
         return collect($gates);
@@ -30,7 +30,7 @@ class Cart
 
     public static function total() : int
     {
-        return self::get()->reduce(function (int $carry, PaymentGate $gate) {
+        return self::get()->reduce(function (int $carry, PaymentWall $gate) {
             return $carry + $gate->getPrice();
         }, 0);
     }

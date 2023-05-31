@@ -1,4 +1,4 @@
 let mix = require('laravel-mix');
 
-mix.js('resources/js/gated.js', 'dist')
+mix.js('resources/js/walls.js', 'dist')
     .setPublicPath('dist');

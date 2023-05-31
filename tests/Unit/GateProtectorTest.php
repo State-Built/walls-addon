@@ -5,16 +5,16 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Statamic\Contracts\Entries\QueryBuilder;
 use Statamic\Facades\Entry;
 use Statamic\Facades\User;
-use State\Gated\GateProtector;
+use State\Walls\WallsProtector;
 
 beforeEach(function () {
-    $this->protector = tap(new GateProtector())->setConfig([
-        'driver' => 'gated',
+    $this->protector = tap(new WallsProtector())->setConfig([
+        'driver' => 'walls',
         'allowed' => ['ecourse'],
         'redirect_url' => '/ecourse',
     ]);
 
-    // Fake the QueryBuilder for gate entries.
+    // Fake the QueryBuilder for wall entries.
     app()->bind(QueryBuilder::class, fn() => new class {
         public function where()
         {
@@ -34,7 +34,7 @@ it('fails when unauthenticated')
     ->protector->protect()
     ->throws(HttpResponseException::class);
 
-it('fails if user does not have gate', function () {
+it('fails if user does not have wall', function () {
     $user = User::make();
 
     Entry::make();
@@ -43,10 +43,10 @@ it('fails if user does not have gate', function () {
     $this->protector->protect();
 })->throws(HttpResponseException::class);
 
-it('passes when the user has the gate', function () {
+it('passes when the user has the wall', function () {
     $user = User::make();
 
-    $user->set('gates', [['handle' => 'ecourse']]);
+    $user->set('walls', [['handle' => 'ecourse']]);
 
     Entry::make();
 
