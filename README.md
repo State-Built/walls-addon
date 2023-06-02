@@ -8,13 +8,11 @@ composer install state/walls-addon
 
 ## Wall types
 
-#### NullWall
+### NullWall
 The NullWall type is an adhoc type for walling off content. This can be manually added to users for testing without doing a full integration.
 
 ### PaymentWall
 The payment wall for Stripe is for one time payment purchases. Optionally you can specify an `expires_after` property to limit the time a user can access the walled content.
-
-
 
 ## Protecting Content
 Walls uses statamic's built in [protector pattern](https://statamic.dev/protecting-content), to configure the protectors open `config/statamic/protect.php`
