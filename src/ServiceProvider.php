@@ -79,9 +79,7 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function registerProtector(): void
     {
-        app(ProtectorManager::class)->extend('walls', function ($app) {
-            return new WallsProtector;
-        });
+        app(ProtectorManager::class)->extend('walls', fn($app) => new WallsProtector);
     }
 
 }
