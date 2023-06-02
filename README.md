@@ -55,7 +55,7 @@ To learn more about protectors I recommend reviewing the statamic docs.
 
 #### Head tag
 For convenience there is the `{{ walls:head }}` tag that should be placed within your template head. This will include a CSRF token and your Stripe publishable key as meta tags, along with a script tag importing stripe-js.
-```handlebars
+```antlers
 <head>
 ...
     {{ walls:head }}
@@ -75,7 +75,7 @@ Output:
 
 #### Add to cart
 The add-to-cart tag will render an html form with a single button that will add the product specified to the cart.
-```handlebars
+```antlers
 {{
     walls:add-to-cart
     class="btn"
@@ -86,7 +86,7 @@ The add-to-cart tag will render an html form with a single button that will add 
 ```
 
 #### Remove from cart
-```handlebars
+```antlers
 {{
     walls:remove-from-cart
     class="btn"
@@ -112,7 +112,7 @@ The add-to-cart tag will render an html form with a single button that will add 
 
 ### Cart
 The cart tag gives you access to the cart data. It returns a total along with each item in your cart containing entries from the walls collection.
-```html
+```antlers
 <h3>Cart</h3>  
 {{ walls:cart }}  
     {{ items }}  
@@ -125,7 +125,7 @@ The cart tag gives you access to the cart data. It returns a total along with ea
 
 ### Owned
 The owned tag returns an array of walls on the user, including the entry from the walls collection.
-```html
+```antlers
 {{ walls:owned }}  
     {{ entry }}  
         <a href="{{ wall_home:url }}">  
