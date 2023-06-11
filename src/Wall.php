@@ -102,7 +102,7 @@ abstract class Wall implements Arrayable
 
     public function toArray(): array
     {
-        if (isset($this->config['wall_home'])) {
+        if (isset($this->config['wall_home']) && isset($this->config['wall_home'][0])) {
             $this->config['wall_home'] = Entry::find($this->config['wall_home'][0])->toArray();
         }
 
