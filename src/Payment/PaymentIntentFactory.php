@@ -29,7 +29,6 @@ class PaymentIntentFactory
             'amount' => Cart::total(),
             'currency' => config('walls.stripe.currency', 'usd'),
             'customer' => $customerId,
-            'setup_future_usage' => 'off_session',
             'metadata' => [
                 'items' => Cart::get()->map->getHandle(),
             ],

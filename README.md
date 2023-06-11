@@ -15,7 +15,7 @@ The NullWall type is an adhoc type for walling off content. This can be manually
 The payment wall for Stripe is for one time payment purchases. Optionally you can specify an `expires_after` property to limit the time a user can access the walled content.
 
 ## Protecting Content
-Walls uses statamic's built in [protector pattern](https://statamic.dev/protecting-content), to configure the protectors open `config/statamic/protect.php`
+Walls uses statamic's built in [protector pattern](https://statamic.dev/protecting-content), to configure the protectors open `config/statamic/pphprotect.php`
 For each content type you wish to protect add new one with a unique key, set the 'driver' to 'walls' and set the 'allow' array to the wall keys that can access that content, and the redirect to where you'd like to redirect users without access to.
 
 ```php
