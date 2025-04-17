@@ -4,6 +4,7 @@
 namespace State\Walls;
 
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Statamic\Auth\Protect\Protectors\Protector;
 use Statamic\Facades\Entry;
@@ -12,7 +13,7 @@ class WallsProtector extends Protector
 {
     public function protect()
     {
-        $allowedGates = array_get($this->config, 'allowed');
+        $allowedGates = Arr::get($this->config, 'allowed');
         $hasAccess = false;
 
         if (Auth::check()) {
@@ -20,13 +21,13 @@ class WallsProtector extends Protector
         }
 
         abort_if(!$hasAccess, redirect(
-            array_get($this->config, 'redirect_url'),
+            Arr::get($this->config, 'redirect_url'),
         ));
     }
 
     protected function checkUsersAccess(array $allowedGates): bool
     {
-        return (bool)array_first($allowedGates, function ($item) {
+        return (bool) collect($allowedGates)->first(function ($item) {
             $entry = Entry::query()
                 ->where('collection', 'walls') // make configurable?
                 ->where('slug', $item)

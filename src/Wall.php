@@ -3,7 +3,6 @@
 
 namespace State\Walls;
 
-use Illuminate\Container\EntryNotFoundException;
 use Illuminate\Contracts\Support\Arrayable;
 use Statamic\Facades\Entry;
 use Statamic\Contracts\Auth\User;
@@ -96,23 +95,20 @@ abstract class Wall implements Arrayable
     {
         $gates = $user->get('walls', []);
 
-        return array_first($gates, function ($gate) {
+        return collect($gates)->first(function ($gate) {
             return $gate['handle'] === $this->handle;
-        }, false);
+        }) ?: false;
     }
 
     public function toArray(): array
     {
         if (isset($this->config['wall_home']) && isset($this->config['wall_home'][0])) {
-            $entry = Entry::find($this->config['wall_home'][0]) ;
-            if(!$entry) {
-                break;
+            $entry = Entry::find($this->config['wall_home'][0]);
+            if ($entry) {
+                $this->config['wall_home'] = $entry->toArray();
             }
-
-            $this->config['wall_home'] = $entry->toArray();
         }
 
         return $this->config;
     }
-
 }
