@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Statamic\Auth\Protect\Protectors\Protector;
 use Statamic\Facades\Entry;
+use Statamic\Facades\User;
 
 class WallsProtector extends Protector
 {
@@ -38,7 +39,7 @@ class WallsProtector extends Protector
             }
 
             return Wall::create($item, $entry->toArray())
-                ->userCanPass(Auth::user());
+                ->userCanPass(User::current());
         });
     }
 
