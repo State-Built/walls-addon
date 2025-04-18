@@ -6,7 +6,6 @@ namespace State\Walls\Payment;
 
 use Statamic\Auth\User;
 use State\Walls\Cart;
-use State\Walls\PaymentWall;
 use Stripe\Customer;
 use Stripe\PaymentIntent;
 
@@ -53,5 +52,5 @@ class PaymentIntentFactory
         $user->set('stripe_customer_id', $customerId);
         $user->save();
     }
-
 }
+

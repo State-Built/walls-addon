@@ -6,6 +6,7 @@ namespace WallsTests\Payment;
 
 use Statamic\Facades\User;
 use State\Walls\Cart;
+use State\Walls\Events\PaymentAcceptedEvent;
 use State\Walls\Wall;
 use State\Walls\Payment\PaymentIntentFactory;
 use Stripe\PaymentIntent;
@@ -31,3 +32,4 @@ it('creates a payment intent', function () {
          ->assertOk()
          ->assertJson(['clientSecret' => 'abc123']);
 });
+
