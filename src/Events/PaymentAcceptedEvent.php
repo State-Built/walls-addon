@@ -2,7 +2,7 @@
 
 namespace State\Walls\Events;
 
-use App\Models\User;
+use Statamic\Contracts\Auth\User;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
