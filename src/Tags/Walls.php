@@ -3,11 +3,10 @@
 
 namespace State\Walls\Tags;
 
-use Illuminate\Support\Facades\Auth;
+use Statamic\Facades\User;
 use Statamic\Tags\Tags;
 use State\Walls\Cart;
 use State\Walls\Wall;
-use State\Walls\Http\Controllers\Payment\SuccessfulPayment;
 
 class Walls extends Tags
 {
@@ -77,11 +76,13 @@ class Walls extends Tags
 
     public function owned()
     {
-        if (!Auth::check()) {
+        $user = User::current();
+
+        if (!$user) {
             return [];
         }
 
-        $userWalls = Auth::user()->get('walls', []);
+        $userWalls = $user->get('walls', []);
 
         return array_map(function ($userWall) {
             $userWall['entry'] = Wall::findBySlug($userWall['handle'])->toArray();
@@ -93,7 +94,7 @@ class Walls extends Tags
 
     public function userOwns() : bool
     {
-        $user = Auth::user();
+        $user = User::current();
 
         if ($user) {
             $owned = collect($user->get('walls', []))->map->handle;
