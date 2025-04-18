@@ -20,7 +20,6 @@ class Walls extends Tags
         return <<<HEAD
             <meta name="csrf_token" content="{$csrfToken}">
             <meta name="stripe_publishable_key" content="{$publishableKey}">
-            <script src="https://js.stripe.com/v3/"></script>
         HEAD;
     }
 

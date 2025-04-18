@@ -5,6 +5,8 @@
 composer install state/walls-addon
 ```
 
+TODO: moving to requiring a collection for `walls`, document this, and make a command or two to scaffold.
+
 
 ## Wall types
 
@@ -65,7 +67,6 @@ Output:
 ...
     <meta name="csrf_token" content="****">  
     <meta name="stripe_publishable_key" content="****">  
-    <script src="https://js.stripe.com/v3/"></script>
 </head>
 ```
 
