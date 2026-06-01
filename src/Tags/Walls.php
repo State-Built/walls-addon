@@ -97,7 +97,7 @@ class Walls extends Tags
         $user = User::current();
 
         if ($user) {
-            $owned = collect($user->get('walls', []))->map->handle;
+            $owned = collect($user->get('walls', []))->pluck('handle');
 
             return $owned->contains($this->params->get('wall'));
         }

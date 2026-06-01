@@ -6,7 +6,7 @@ namespace State\Walls\Http\Controllers\Payment;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Statamic\Auth\User;
+use Statamic\Contracts\Auth\User;
 use Statamic\Facades\User as UserFacade;
 use Statamic\Facades\Entry;
 use State\Walls\Cart;

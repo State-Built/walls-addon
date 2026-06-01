@@ -4,11 +4,8 @@ namespace State\Walls;
 
 use Illuminate\Support\Facades\Route;
 use Statamic\Auth\Protect\ProtectorManager;
-use Statamic\Facades\Addon;
 use Statamic\Facades\CP\Nav;
 use Statamic\Providers\AddonServiceProvider;
-use Statamic\Support\Str;
-use State\Walls\Http\Middleware\GateMiddleware;
 use State\Walls\Tags\Walls;
 use Stripe\Stripe;
 
@@ -24,10 +21,8 @@ class ServiceProvider extends AddonServiceProvider
         Walls::class,
     ];
 
-    public function boot()
+    public function bootAddon()
     {
-        parent::boot();
-
         if ($this->app->runningInConsole()) {
             $this->publishResources();
         }
@@ -54,7 +49,9 @@ class ServiceProvider extends AddonServiceProvider
 
     private function setUpStripe()
     {
-        Stripe::setApiKey(config('walls.payments.stripe.secret_key'));
+        if ($secretKey = config('walls.payments.stripe.secret_key')) {
+            Stripe::setApiKey($secretKey);
+        }
     }
 
     private function publishResources()
@@ -79,7 +76,7 @@ class ServiceProvider extends AddonServiceProvider
 
     protected function registerProtector(): void
     {
-        app(ProtectorManager::class)->extend('walls', fn($app) => new WallsProtector);
+        app(ProtectorManager::class)->extend('walls', fn () => new WallsProtector);
     }
 
 }

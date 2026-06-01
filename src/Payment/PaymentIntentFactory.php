@@ -4,7 +4,7 @@
 namespace State\Walls\Payment;
 
 
-use Statamic\Auth\User;
+use Statamic\Contracts\Auth\User;
 use State\Walls\Cart;
 use Stripe\Customer;
 use Stripe\PaymentIntent;
@@ -26,12 +26,12 @@ class PaymentIntentFactory
 
         return PaymentIntent::create([ // todo: support multi-currency.
             'amount' => Cart::total(),
-            'currency' => config('walls.stripe.currency', 'usd'),
+            'currency' => config('walls.payments.stripe.currency', 'usd'),
             'customer' => $customerId,
             'metadata' => [
                 'items' => Cart::get()->map->getHandle(),
             ],
-            'payment_method_types' => config('walls.stripe.payment_method_types', ['card']),
+            'payment_method_types' => config('walls.payments.stripe.payment_method_types', ['card']),
         ]);
     }
 

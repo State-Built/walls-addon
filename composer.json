@@ -1,5 +1,7 @@
 {
     "name": "state/walls",
+    "description": "Statamic paywall addon for gated content and Stripe payments.",
+    "license": "proprietary",
     "autoload": {
         "psr-4": {
             "State\\Walls\\": "src"
@@ -22,13 +24,13 @@
         }
     },
     "require": {
-        "statamic/cms": ">=5.0",
+        "php": "^8.2",
+        "statamic/cms": "^5.0",
         "stripe/stripe-php": "^7.100"
     },
     "require-dev": {
-        "orchestra/testbench": "^v8.5",
-        "pestphp/pest": "^v2.6.0",
-        "pestphp/pest-plugin-mock": "^v2.0.0"
+        "orchestra/testbench": "^8.5 || ^9.0",
+        "pestphp/pest": "^2.36 || ^3.0"
     },
     "scripts": {
         "test": "vendor/bin/pest",

@@ -14,16 +14,15 @@ class WallsProtector extends Protector
 {
     public function protect()
     {
-        $allowedGates = Arr::get($this->config, 'allowed');
+        $allowedGates = Arr::get($this->config, 'allowed', Arr::get($this->config, 'allow', []));
+        $redirectUrl = Arr::get($this->config, 'redirect_url', Arr::get($this->config, 'redirect', '/'));
         $hasAccess = false;
 
         if (Auth::check()) {
             $hasAccess = $this->checkUsersAccess($allowedGates);
         }
 
-        abort_if(!$hasAccess, redirect(
-            Arr::get($this->config, 'redirect_url'),
-        ));
+        abort_if(! $hasAccess, redirect($redirectUrl));
     }
 
     protected function checkUsersAccess(array $allowedGates): bool
@@ -34,7 +33,7 @@ class WallsProtector extends Protector
                 ->where('slug', $item)
                 ->first();
 
-            if($entry === null) {
+            if ($entry === null) {
                 return false;
             }
 

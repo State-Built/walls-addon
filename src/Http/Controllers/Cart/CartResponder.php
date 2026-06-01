@@ -2,18 +2,16 @@
 
 namespace State\Walls\Http\Controllers\Cart;
 
-use Illuminate\Http\Request;
-
 class CartResponder
 {
     public function respond()
     {
-        if(request()->expectsJson()) {
+        if (request()->expectsJson()) {
             return response([], 201);
         }
 
-        if($redirect = request()->string('redirect')) {
-            return redirect($redirect);
+        if (request()->filled('redirect')) {
+            return redirect(request()->input('redirect'));
         }
 
         return back();
